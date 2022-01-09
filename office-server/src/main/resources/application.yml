@@ -24,6 +24,17 @@ spring:
       connection-timeout: 30000
       # 测试连接是否可用的查询语句
       connection-test-query: SELECT 1
+#  redis:
+#    timeout: 10000ms #连接超时时间
+#    host: 127.0.0.1
+#    port: 6379
+#    database:
+#    lettuce:
+#      pool:
+#        max-active: 1024 #最大连接数 默认8
+#        max-wait: 10000ms #最大连接阻塞等待时间 默认-1
+#        min-idle: 5 #最小空闲连接，默认0
+#        max-idle: 200 #最最大空闲连接 默认8
 
 # mybatis-plus配置
 mybatis-plus:
@@ -47,3 +58,4 @@ jwt:
   expiration: 604800
   # 荷载中拿到开头
   tokenHead: Bearer
+

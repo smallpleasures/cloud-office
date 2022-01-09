@@ -42,7 +42,6 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             String authToken = authHeader.substring(this.tokenHead.length());
             String username = jwtTokenUtil.getUsernameFromToken(authToken);
             // token中存在用户名但未登录
-            System.out.println(SecurityContextHolder.getContext().getAuthentication());
             if (null != username && null == SecurityContextHolder.getContext().getAuthentication()) {
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
                 if (jwtTokenUtil.validateToken(authToken, userDetails)) {
@@ -50,7 +49,6 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
                             null, userDetails.getAuthorities());
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authentication);
-                    System.out.println(authentication);
                 }
             }
         }

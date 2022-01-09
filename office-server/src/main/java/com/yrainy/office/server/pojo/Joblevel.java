@@ -24,9 +24,9 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("t_position")
-@ApiModel(value = "Position对象", description = "职位")
-public class Position implements Serializable {
+@TableName("t_joblevel")
+@ApiModel(value="Joblevel对象", description="职称管理")
+public class Joblevel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -34,11 +34,14 @@ public class Position implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty(value = "职位")
+    @ApiModelProperty(value = "职称名称")
     private String name;
 
+    @ApiModelProperty(value = "职称等级")
+    private String titleLevel;
+
     @ApiModelProperty(value = "创建时间")
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Shanghai")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Shanghai")
     private LocalDateTime createDate;
 
     @ApiModelProperty(value = "是否启用")

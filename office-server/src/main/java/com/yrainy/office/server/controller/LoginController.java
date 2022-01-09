@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,13 +41,14 @@ public class LoginController {
 
     @ApiOperation(value = "获取当前用户信息")
     @GetMapping("/admin/info")
-    public RespBean getAdminInfo(Principal principal) {
+    public RespBean getAdminInfo(@ApiIgnore Principal principal) {
         if (null == principal) {
             return null;
         }
         String username = principal.getName();
         Admin admin = adminService.getAdminByUsername(username);
         admin.setPassword(null);
+        admin.setRoles(adminService.getRolesByAdminId(admin.getId()));
         return RespBean.success("获取成功", admin);
     }
 

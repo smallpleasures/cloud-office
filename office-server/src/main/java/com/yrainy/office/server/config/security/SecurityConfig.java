@@ -4,8 +4,10 @@ import com.yrainy.office.server.pojo.Admin;
 import com.yrainy.office.server.service.IAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -14,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
@@ -30,10 +33,38 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
     @Autowired
     private RestfulAccessDeniedHandler restfulAccessDeniedHandler;
+    @Autowired
+    private CustomUrlDecisionManager customUrlDecisionManager;
+    @Autowired
+    private CustomFilter customFilter;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         //auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoded());
+    }
+
+    // 放行路径（不走拦截链）
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers(
+                "/websocket/**",
+                "/**.html",
+                "/login/**",
+                "/hello/**",
+                "/register/**",
+                "/logout/**",
+                "/css/**",
+                "/js/**",
+                "/img/**",
+                "/fonts/**",
+                "favicon.ico",
+                "/doc.html",                    // 放行 swagger 资源
+                "/webjars/**",                  // 放行 swagger 资源
+                "/swagger-resources/**",        // 放行 swagger 资源
+                "/v2/api-docs/**",              // 放行 swagger 资源
+                "/captcha",      // 验证码接口
+                "/ws/**"
+        );
     }
 
     @Override
@@ -44,10 +75,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/login", "/logout")
-                .permitAll()
+                /*.antMatchers("/login", "/logout")
+                .permitAll()*/
                 .anyRequest()
                 .authenticated()
+                .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
+                    @Override
+                    public <O extends FilterSecurityInterceptor> O postProcess(O object) {
+                        object.setAccessDecisionManager(customUrlDecisionManager);
+                        object.setSecurityMetadataSource(customFilter);
+                        return object;
+                    }
+                })
                 .and()
                 .headers()
                 .cacheControl();
@@ -66,6 +105,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return username -> {
             Admin admin = adminService.getAdminByUsername(username);
             if (null != admin) {
+                admin.setRoles(adminService.getRolesByAdminId(admin.getId()));
                 return admin;
             }
             return null;

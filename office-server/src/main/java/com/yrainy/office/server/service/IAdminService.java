@@ -3,8 +3,10 @@ package com.yrainy.office.server.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.yrainy.office.server.entity.RespBean;
 import com.yrainy.office.server.pojo.Admin;
+import com.yrainy.office.server.pojo.Role;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * <p>
@@ -31,4 +33,26 @@ public interface IAdminService extends IService<Admin> {
      * @return
      */
     Admin getAdminByUsername(String username);
+
+    /**
+     * 根据用户id获取角色列表
+     * @param adminId
+     * @return
+     */
+    List<Role> getRolesByAdminId(Integer adminId);
+
+    /**
+     * 获取所有操作员
+     * @param keywords
+     * @return
+     */
+    List<Admin> getAllAdmins(String keywords);
+
+    /**
+     * 更新操作员角色
+     * @param adminId
+     * @param rids
+     * @return
+     */
+    RespBean addAdminRole(Integer adminId, Integer[] rids);
 }

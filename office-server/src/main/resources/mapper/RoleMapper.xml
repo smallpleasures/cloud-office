@@ -14,4 +14,17 @@
         id, name, nameZh
     </sql>
 
+    <!--根据用户id获取角色列表-->
+    <select id="getRolesByAdminId" resultType="com.yrainy.office.server.pojo.Role">
+        SELECT
+            r.id,
+            r.name,
+            r.nameZh
+        FROM
+            t_role as r
+            LEFT JOIN t_admin_role ar on ar.rid = r.id
+        where
+            ar.adminId = #{adminId}
+    </select>
+
 </mapper>
