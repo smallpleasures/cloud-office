@@ -24,7 +24,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("t_position")
-@ApiModel(value="Position对象", description="")
+@ApiModel(value = "Position对象", description = "")
 public class Position implements Serializable {
 
     private static final long serialVersionUID = 1L;

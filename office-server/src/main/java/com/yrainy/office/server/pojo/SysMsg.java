@@ -23,7 +23,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("t_sys_msg")
-@ApiModel(value="SysMsg对象", description="")
+@ApiModel(value = "SysMsg对象", description = "")
 public class SysMsg implements Serializable {
 
     private static final long serialVersionUID = 1L;
