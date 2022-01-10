@@ -60,6 +60,26 @@
         </association>
     </resultMap>
 
+    <resultMap id="EmployeeWithSalary" type="com.yrainy.office.server.pojo.Employee" extends="BaseResultMap">
+        <association property="salary" javaType="com.yrainy.office.server.pojo.Salary">
+            <id column="sid" property="id"/>
+            <result column="sname" property="name"/>
+            <result column="abasicSalary" property="allSalary"/>
+            <result column="sbonus" property="bonus"/>
+            <result column="slunchSalary" property="lunchSalary"/>
+            <result column="strafficSalary" property="trafficSalary"/>
+            <result column="sallSalary" property="allSalary"/>
+            <result column="spensionBase" property="pensionBase"/>
+            <result column="smedicalBase" property="medicalBase"/>
+            <result column="smedicalPer" property="medicalPer"/>
+            <result column="saccumulationFundBase" property="accumulationFundBase"/>
+            <result column="saccumulationFundPer" property="accumulationFundPer"/>
+        </association>
+        <association property="department" javaType="com.yrainy.office.server.pojo.Department">
+            <result column="dname" property="name"/>
+        </association>
+    </resultMap>
+
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, name, gender, birthday, idCard, wedlock, nationId, nativePlace, politicId, email, phone, address, departmentId, jobLevelId, posId, engageForm, tiptopDegree, specialty, school, beginDate, workState, workID, contractTerm, conversionTime, notWorkDate, beginContract, endContract, workAge, salaryId
@@ -151,6 +171,30 @@
         <if test="null!=id">
             AND e.id = #{id}
         </if>
+        ORDER BY e.id
+    </select>
+
+    <!--  获取所有员工账套(分页）-->
+    <select id="getEmployeeWithSalary" resultMap="EmployeeWithSalary">
+        SELECT
+            e.*,
+            d.name AS dname,
+            s.id AS sid,
+            s.name AS sname,
+            s.basicSalary AS abasicSalary,
+            s.bonus AS sbonus,
+            s.lunchSalary AS slunchSalary,
+            s.trafficSalary AS strafficSalary,
+            s.allSalary AS sallSalary,
+            s.pensionBase AS spensionBase,
+            s.pensionPer AS spensionPer,
+            s.medicalBase AS smedicalBase,
+            s.medicalPer AS smedicalPer,
+            s.accumulationFundBase AS saccumulationFundBase,
+            s.accumulationFundPer AS saccumulationFundPer
+        FROM t_employee e
+                 LEFT JOIN t_salary s ON e.salaryId = s.id
+                 LEFT JOIN t_department d ON e.departmentId = d.id
         ORDER BY e.id
     </select>
 

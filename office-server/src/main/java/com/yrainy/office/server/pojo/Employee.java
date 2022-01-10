@@ -15,6 +15,7 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * <p>
@@ -174,6 +175,8 @@ public class Employee implements Serializable {
     @TableField(exist = false)
     @ExcelEntity(name = "职位")
     private Position position;
+
+    private Salary salary;
 
 
 }
