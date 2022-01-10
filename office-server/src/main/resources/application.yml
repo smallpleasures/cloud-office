@@ -43,6 +43,7 @@ mybatis-plus:
   configuration:
     # 自动驼峰命名默认关闭
     map-underscore-to-camel-case: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 # sql打印
 logging:

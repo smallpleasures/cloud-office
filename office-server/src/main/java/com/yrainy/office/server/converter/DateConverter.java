@@ -1,6 +1,7 @@
 package com.yrainy.office.server.converter;
 
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ import java.util.Date;
  * @since: 1.0.0
  */
 
+@Component
 public class DateConverter implements Converter<String, LocalDate> {
 
     @Override
