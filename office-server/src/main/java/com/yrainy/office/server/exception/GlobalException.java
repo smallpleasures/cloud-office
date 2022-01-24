@@ -1,6 +1,7 @@
 package com.yrainy.office.server.exception;
 
 import com.yrainy.office.server.entity.RespBean;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.sql.SQLException;
@@ -14,6 +15,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
 @RestControllerAdvice
 public class GlobalException {
 
+    @ExceptionHandler
     public RespBean mySQLException(SQLException e) {
         if (e instanceof SQLIntegrityConstraintViolationException) {
             return RespBean.error("该数据有关联数据，操作失败！");

@@ -124,7 +124,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     @Transactional // 开启事务
     public RespBean addAdminRole(Integer adminId, Integer[] rids) {
         // 先删除全部，后调用方法重新全部添加
-        adminRoleMapper.delete(new QueryWrapper<AdminRole>().eq("admin_id", adminId));
+        adminRoleMapper.delete(new QueryWrapper<AdminRole>().eq("adminId", adminId));
         if (ArrayUtils.isEmpty(rids)) {
             return RespBean.success("更新成功！");
         }
