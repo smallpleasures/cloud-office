@@ -64,12 +64,13 @@
         <association property="salary" javaType="com.yrainy.office.server.pojo.Salary">
             <id column="sid" property="id"/>
             <result column="sname" property="name"/>
-            <result column="abasicSalary" property="allSalary"/>
+            <result column="sbasicSalary" property="basicSalary"/>
             <result column="sbonus" property="bonus"/>
             <result column="slunchSalary" property="lunchSalary"/>
             <result column="strafficSalary" property="trafficSalary"/>
             <result column="sallSalary" property="allSalary"/>
             <result column="spensionBase" property="pensionBase"/>
+            <result column="spensionPer" property="pensionPer"/>
             <result column="smedicalBase" property="medicalBase"/>
             <result column="smedicalPer" property="medicalPer"/>
             <result column="saccumulationFundBase" property="accumulationFundBase"/>
@@ -181,7 +182,7 @@
             d.name AS dname,
             s.id AS sid,
             s.name AS sname,
-            s.basicSalary AS abasicSalary,
+            s.basicSalary AS sbasicSalary,
             s.bonus AS sbonus,
             s.lunchSalary AS slunchSalary,
             s.trafficSalary AS strafficSalary,
