@@ -71,10 +71,10 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         if (!userDetails.isEnabled()) {
             return RespBean.error("账户被禁用，请联系管理员！");
         }
-        /*UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                 userDetails, null, userDetails.getAuthorities()
         );
-        SecurityContextHolder.getContext().setAuthentication(authentication);*/
+        SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtTokenUtil.generateToken(userDetails);
         Map<String, String> tokenMap = new HashMap<>();
         tokenMap.put("tokenHead", tokenHead);
