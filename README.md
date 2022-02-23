@@ -12,7 +12,6 @@
 
 >项目采用前后端分离开发模式，包括用户管理，角色管理，权限管理，部门管理，职位管理，职称管理，员工资料，薪资管理，个人中心，在线聊天等模块。
 
-
 ###  [后端项目](https://github.com/smallpleasures/office "后端项目") & [前端项目](https://github.com/smallpleasures/office-vue "前端项目")
 
 #### 模块划分
@@ -25,6 +24,14 @@
 ![1645593194914](document/images/技术栈.png)
 
 注意：项目未用到redis，验证码，fastdfs，云存储等技术，运行起来看效果比较容易
+
+#### 项目运行
+
+后端：sql文件导入数据库后，启动项目
+
+接口文档：localhost:8081/doc.html
+
+前端：执行npm  install后，npm run serve运行项目即可，登录密码123
 
 #### 演示页面
 
