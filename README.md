@@ -67,6 +67,6 @@
 
 ### 交流
 
-交流，我的email是yrainy2021@163.com
+我的email是yrainy2021@163.com
 
 
