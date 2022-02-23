@@ -3,9 +3,9 @@
 
 ​    <a href="https://www.oracle.com/technetwork/java/javase/downloads/index.html"><img src="https://img.shields.io/badge/JDK-8+-green.svg" alt="jdk 8+"></a>
     <a href="#"><img src="https://img.shields.io/badge/springboot-2.3.0-yellow.svg?style=flat-square"></a>
-    <a href="https://github.com/zykzhangyukang/Xinguan"><img src="https://img.shields.io/github/stars/smallpleasures/office?style=social" alt="GitHub stars"></a>
-    <a href="https://github.com/zykzhangyukang/Xinguan"><img src="https://img.shields.io/github/forks/smallpleasures/office?style=social" alt="GitHub forks"></a>
-    <a href="https://github.com/zykzhangyukang/Xinguan"><img src="https://img.shields.io/github/repo-size/smallpleasures/office" alt="size"></a>
+    <a href="#"><img src="https://img.shields.io/github/stars/smallpleasures/office?style=social" alt="GitHub stars"></a>
+    <a href="#"><img src="https://img.shields.io/github/forks/smallpleasures/office?style=social" alt="GitHub forks"></a>
+    <a href="#"><img src="https://img.shields.io/github/repo-size/smallpleasures/office" alt="size"></a>
 </p>
 
 ---
