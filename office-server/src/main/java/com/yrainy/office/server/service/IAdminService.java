@@ -64,4 +64,11 @@ public interface IAdminService extends IService<Admin> {
      * @return
      */
     RespBean updateAdminPassword(String oldPass, String pass, Integer adminId);
+
+    /**
+     * 获取所有可用操作员
+     * @param keywords
+     * @return
+     */
+    List<Admin> getAllEnabledAdmins(String keywords);
 }

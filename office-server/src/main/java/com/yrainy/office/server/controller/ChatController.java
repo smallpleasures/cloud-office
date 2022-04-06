@@ -23,10 +23,10 @@ public class ChatController {
     @Autowired
     private IAdminService adminService;
 
-    @ApiOperation(value = "获取所有操作员")
+    @ApiOperation(value = "获取可用的所有操作员")
     @GetMapping("/admin")
     public List<Admin> getAllAdmins(String keywords){
-        // 调用 getAllAdmins 方法
-        return adminService.getAllAdmins(keywords);
+        // 调用 getAllEnabledAdmins 方法
+        return adminService.getAllEnabledAdmins(keywords);
     }
 }

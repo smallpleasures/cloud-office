@@ -12,6 +12,7 @@ import com.yrainy.office.server.pojo.Admin;
 import com.yrainy.office.server.pojo.AdminRole;
 import com.yrainy.office.server.pojo.Role;
 import com.yrainy.office.server.service.IAdminService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -112,6 +113,20 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     public List<Admin> getAllAdmins(String keywords) {
         return adminMapper.getAllAdmins(((Admin) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
         .getId(), keywords);
+    }
+
+    /**
+     * 获取所有可用操作员
+     * @param keywords
+     * @return
+     */
+    @Override
+    public List<Admin> getAllEnabledAdmins(String keywords) {
+        return adminMapper.selectList(new QueryWrapper<Admin>()
+                .eq("enabled", 1)
+                .ne("id", ((Admin) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId())
+                .like(StringUtils.isNoneBlank(keywords), "name", keywords)
+                .orderByAsc("id"));
     }
 
     /**

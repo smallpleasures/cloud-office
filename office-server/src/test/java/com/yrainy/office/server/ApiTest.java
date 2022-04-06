@@ -19,4 +19,9 @@ public class ApiTest {
         list.add("hah");
         Assert.assertTrue(list.contains(new String("hah")));
     }
+
+    @Test
+    public void testCal() {
+        System.out.println("xd012" + 1);
+    }
 }
