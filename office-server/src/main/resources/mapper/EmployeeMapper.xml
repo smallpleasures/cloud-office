@@ -93,7 +93,7 @@
         n.id AS nid,
         n.name AS nname,
         p.id AS pid,
-        P.name AS pname,
+        p.name AS pname,
         d.id AS did,
         d.name AS dname,
         j.id AS jid,
